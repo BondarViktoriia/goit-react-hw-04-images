@@ -1,16 +1,26 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Component } from 'react';
+import SearchBar from './Searchbar';
+
+
+export class App extends Component {
+  state = {
+   query:'',
+ }
+
+  handleSerchSubmit = query => {
+    this.setState({query})
+  }
+
+  //     'https://pixabay.com/api/?q=cat&page=1&key=30472076-91990f645bc169d0b44b794c0&image_type=photo&orientation=horizontal&per_page=12'
+
+
+  render() {
+
+    return (
+      <>
+        <SearchBar onSubmit={this.handleSerchSubmit } />
+   
+      </>
+    );
+  }
+}
