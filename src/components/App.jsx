@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import ImageGallery from './ImageGallery';
 import SearchBar from './Searchbar';
 
 
@@ -7,7 +8,7 @@ export class App extends Component {
    query:'',
  }
 
-  handleSerchSubmit = query => {
+  handleSearchSubmit = query => {
     this.setState({query})
   }
 
@@ -18,8 +19,8 @@ export class App extends Component {
 
     return (
       <>
-        <SearchBar onSubmit={this.handleSerchSubmit } />
-   
+        <SearchBar onSubmit={this.handleSearchSubmit } />
+        <ImageGallery query={ this.state.query} />
       </>
     );
   }
