@@ -20,7 +20,7 @@ export class App extends Component {
     return (
       <>
         <SearchBar onSubmit={this.handleSearchSubmit } />
-        <ImageGallery query={ this.state.query} />
+        <ImageGallery query={this.state.query} />
       </>
     );
   }
