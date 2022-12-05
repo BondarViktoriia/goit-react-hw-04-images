@@ -1,24 +1,54 @@
-import PropTypes from 'prop-types';
+import { Component } from 'react';
+import Modal from 'components/Modal/Modal';
 
-export const ImageGalleryItem = ({ images: { hits } }) => {
-  return (
-    <ul>
-      {hits.map(entry => (
-        <li key={entry.id}>
-          <img src={entry.webformatURL} alt={entry.tags} width="300" />
-        </li>
-      ))}
-    </ul>
-  );
-};
-ImageGalleryItem.propTypes = {
-  images: PropTypes.objectOf(
-    PropTypes.exact({
-      id: PropTypes.number.isRequired,
-      webformatURL: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+export class ImageGalleryItem extends Component {
+  state = {
+    isModalOpen: false,
+ 
+  };
+
+
+  toggleModal = () => {
+    this.setState(({ isModalOpen}) => ({
+      isModalOpen: !isModalOpen,
+   
+    }));
+  };
+
+  render() {
+    const { images: { hits }} = this.props;
+    
+
+    return (
+      <>
+        <ul>
+          {hits.map(entry => (
+            <li key={entry.id}>
+              <img
+                src={entry.webformatURL}
+                alt={entry.tags}
+                width="300"
+                onClick={this.toggleModal}
+               
+              />
+           
+            </li>
+            
+          ))}
+          {this.state.isModalOpen && (
+        
+          <Modal
+            largeImageURL={hits.map(entry=>(entry.largeImageURL))}
+            tags={hits.map(entry=>(entry.tags))}
+              onClose={this.toggleModal}
+              
+          />
+        )}
+        </ul>
+
+      </>
+    );
+  }
+}
 
 export default ImageGalleryItem;

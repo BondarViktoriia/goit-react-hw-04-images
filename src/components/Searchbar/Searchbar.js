@@ -43,6 +43,7 @@ export class SearchBar extends Component {
           />
         </form>
       </header>
+      
     );
   }
 }
