@@ -3,9 +3,10 @@ import ImageGallery from './ImageGallery';
 import SearchBar from './Searchbar';
 
 
+
 export class App extends Component {
   state = {
-   query:'',
+    query: '',
  }
 
   handleSearchSubmit = query => {
@@ -20,7 +21,8 @@ export class App extends Component {
     return (
       <>
         <SearchBar onSubmit={this.handleSearchSubmit } />
-        <ImageGallery query={this.state.query} />
+        <ImageGallery query={this.state.query}   />
+
       </>
     );
   }

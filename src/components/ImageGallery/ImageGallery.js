@@ -50,6 +50,7 @@ export default class ImageGallery extends Component {
 
   render() {
     const { images, error, status } = this.state;
+ 
 
     if (status === 'idle') {
       return <div>Введите запрос! </div>;
@@ -64,7 +65,7 @@ export default class ImageGallery extends Component {
     if (status === 'resolved') {
       return (
         <div>
-          <ImageGalleryItem images={images} />
+          <ImageGalleryItem images={images}  />
           <Button onClick={this.loadMore } />
         </div>
       );

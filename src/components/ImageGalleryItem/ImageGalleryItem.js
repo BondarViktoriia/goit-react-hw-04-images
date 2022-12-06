@@ -4,13 +4,13 @@ import Modal from 'components/Modal/Modal';
 export class ImageGalleryItem extends Component {
   state = {
     isModalOpen: false,
- 
   };
 
 
   toggleModal = () => {
     this.setState(({ isModalOpen}) => ({
       isModalOpen: !isModalOpen,
+
    
     }));
   };
@@ -23,12 +23,13 @@ export class ImageGalleryItem extends Component {
       <>
         <ul>
           {hits.map(entry => (
-            <li key={entry.id}>
+            <li key={entry.id} >
               <img
                 src={entry.webformatURL}
                 alt={entry.tags}
                 width="300"
                 onClick={this.toggleModal}
+                largeImageURL={entry.large}
                
               />
            
@@ -38,8 +39,8 @@ export class ImageGalleryItem extends Component {
           {this.state.isModalOpen && (
         
           <Modal
-            largeImageURL={hits.map(entry=>(entry.largeImageURL))}
-            tags={hits.map(entry=>(entry.tags))}
+            largeImageURL={hits.largeImageURL}
+              tags={hits.tags}
               onClose={this.toggleModal}
               
           />
