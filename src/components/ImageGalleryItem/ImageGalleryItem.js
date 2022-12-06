@@ -1,5 +1,6 @@
+import ImageCard from 'components/ImageCard/ImageCard';
 import { Component } from 'react';
-import Modal from 'components/Modal/Modal';
+
 
 export class ImageGalleryItem extends Component {
   state = {
@@ -23,28 +24,11 @@ export class ImageGalleryItem extends Component {
       <>
         <ul>
           {hits.map(entry => (
-            <li key={entry.id} >
-              <img
-                src={entry.webformatURL}
-                alt={entry.tags}
-                width="300"
-                onClick={this.toggleModal}
-                largeImageURL={entry.large}
-               
-              />
-           
-            </li>
+
+            <ImageCard entry={entry} toggleModal={this.toggleModal} isModalOpen={this.state.isModalOpen} key={entry.id } />
             
           ))}
-          {this.state.isModalOpen && (
-        
-          <Modal
-            largeImageURL={hits.largeImageURL}
-              tags={hits.tags}
-              onClose={this.toggleModal}
-              
-          />
-        )}
+
         </ul>
 
       </>

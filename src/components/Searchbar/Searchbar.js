@@ -1,7 +1,11 @@
 import { Component } from 'react';
 import { BiSearch } from 'react-icons/bi';
-
-
+import {
+  SearchHeader,
+  SearchForm,
+  SearchButton,
+  SearchInput,
+} from './Searchbar.styled';
 
 export class SearchBar extends Component {
   state = {
@@ -14,25 +18,25 @@ export class SearchBar extends Component {
     });
   };
   handleSubmit = e => {
-      e.preventDefault();
-      if (this.state.query.trim() === '') {
-          alert('Введите запрос');
-          return;
-      }
-      this.props.onSubmit(this.state.query);
+    e.preventDefault();
+    if (this.state.query.trim() === '') {
+      alert('Введите запрос');
+      return;
+    }
+    this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
   };
 
   render() {
     return (
-      <header>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit">
+      <SearchHeader>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchButton type="submit">
             <BiSearch />
             <span>Search</span>
-          </button>
+          </SearchButton>
 
-          <input
+          <SearchInput
             type="text"
             autoComplete="off"
             autoFocus
@@ -41,9 +45,8 @@ export class SearchBar extends Component {
             value={this.state.query}
             onChange={this.handleQueryChange}
           />
-        </form>
-      </header>
-      
+        </SearchForm>
+      </SearchHeader>
     );
   }
 }
