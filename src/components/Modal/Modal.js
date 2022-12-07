@@ -10,11 +10,11 @@ export default class Modal extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('keydown', this.hendleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown );
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.hendleKeyDown);
+    window.removeEventListener('keydown', this.handleKeyDown );
   }
 
   handleKeyDown = e => {
