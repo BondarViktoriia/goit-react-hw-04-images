@@ -13,7 +13,6 @@ export class App extends Component {
     this.setState({query})
   }
 
-  //     'https://pixabay.com/api/?q=cat&page=1&key=30472076-91990f645bc169d0b44b794c0&image_type=photo&orientation=horizontal&per_page=12'
 
 
   render() {

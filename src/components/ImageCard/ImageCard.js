@@ -1,5 +1,6 @@
-import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modal';
 import { Component } from 'react';
+import { Picture } from './ImageCard.styled';
 
 export class ImageCard extends Component {
   state = {
@@ -15,7 +16,7 @@ export class ImageCard extends Component {
   render() {
     return (
       <li>
-        <img
+        <Picture
           src={this.props.entry.webformatURL}
           alt={this.props.entry.tags}
           width="300"

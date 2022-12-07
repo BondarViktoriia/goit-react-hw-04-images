@@ -1,8 +1,9 @@
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { Component } from 'react';
-import Loader from 'components/Loader/Loader';
-import Button from 'components/Button/Button';
-
+import Loader from 'components/Loader';
+import Button from 'components/Button';
+import { GalleryContainer, Request, ErrorMessage } from './ImageGallery.styled';
+import PropTypes from 'prop-types';
 
 export default class ImageGallery extends Component {
   state = {
@@ -10,6 +11,10 @@ export default class ImageGallery extends Component {
     error: null,
     status: 'idle',
     page: 1,
+  };
+
+  static propTypes = {
+    currentQuery: PropTypes.string,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -20,7 +25,7 @@ export default class ImageGallery extends Component {
 
     if (prevQuery !== currentQuery || prevState.page !== this.state.page) {
       console.log('Изменился query');
-             this.setState({ status: 'pending' });
+      this.setState({ status: 'pending' });
       fetch(
         `https://pixabay.com/api/?q=${currentQuery}}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`
       )
@@ -32,42 +37,35 @@ export default class ImageGallery extends Component {
             new Error(`По Вашему запросу ${currentQuery} ничего не найдено!`)
           );
         })
-        .then(images=> this.setState({ images, status: 'resolved'}))
+        .then(images => this.setState({ images, status: 'resolved' }))
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
-
- 
   }
   loadMore = () => {
     this.setState(prevState => ({
-      page: prevState.page +1
-    }))
-  }
-
-
-
-
+      page: prevState.page + 1,
+    }));
+  };
 
   render() {
     const { images, error, status } = this.state;
- 
 
     if (status === 'idle') {
-      return <div>Введите запрос! </div>;
+      return <Request>Введите запрос! </Request>;
     }
     if (status === 'pending') {
       return <Loader />;
     }
 
     if (status === 'rejected') {
-      return <h1>{error.message} </h1>;
+      return <ErrorMessage>{error.message} </ErrorMessage>;
     }
     if (status === 'resolved') {
       return (
-        <div>
-          <ImageGalleryItem images={images}  />
-          <Button onClick={this.loadMore } />
-        </div>
+        <GalleryContainer>
+          <ImageGalleryItem images={images} />
+          <Button onClick={this.loadMore} />
+        </GalleryContainer>
       );
     }
   }
