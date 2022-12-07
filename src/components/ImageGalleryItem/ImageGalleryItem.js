@@ -1,4 +1,4 @@
-import ImageCard from 'components/ImageCard/ImageCard';
+import ImageCard from 'components/ImageCard';
 import { Component } from 'react';
 import { GalleryContainer } from './ImageGalleryItem.styled';
 
@@ -14,7 +14,7 @@ export class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { images: { hits }} = this.props;
+    const {images: { hits }} = this.props;
 
     return (
       <>

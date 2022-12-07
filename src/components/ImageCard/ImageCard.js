@@ -1,10 +1,20 @@
 import Modal from 'components/Modal';
 import { Component } from 'react';
 import { Picture } from './ImageCard.styled';
+import PropTypes from 'prop-types';
 
 export class ImageCard extends Component {
   state = {
     isModalOpen: false,
+  };
+
+  static propTypes = {
+    enty: PropTypes.arrayOf(
+      PropTypes.shape({
+        webformatURL: PropTypes.string.isRequired,
+        tags: PropTypes.string.isRequired,
+      })
+    ),
   };
 
   toggleModal = () => {
