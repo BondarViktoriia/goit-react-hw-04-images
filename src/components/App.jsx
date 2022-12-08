@@ -5,10 +5,11 @@ import SearchBar from './Searchbar';
 export class App extends Component {
   state = {
     query: '',
+    page:1
   };
 
   handleSearchSubmit = query => {
-    this.setState({ query });
+    this.setState({ query, page:1 });
   };
 
   render() {
