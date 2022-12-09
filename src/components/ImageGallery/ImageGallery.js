@@ -4,6 +4,7 @@ import Loader from 'components/Loader';
 import Button from 'components/Button';
 import { GalleryContainer, Request, ErrorMessage } from './ImageGallery.styled';
 import PropTypes from 'prop-types';
+import pixabayApi from '../services/pixabay-api'
 
 export default class ImageGallery extends Component {
   state = {
@@ -18,25 +19,14 @@ export default class ImageGallery extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const key = '30472076-91990f645bc169d0b44b794c0';
     const prevQuery = prevProps.query;
     const currentQuery = this.props.query;
     const { page } = this.state;
 
     if (prevQuery !== currentQuery || prevState.page !== this.state.page) {
       console.log('Изменился query');
-      this.setState({ status: 'pending' });
-      fetch(
-        `https://pixabay.com/api/?q=${currentQuery}}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`
-      )
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(
-            new Error(`По Вашему запросу ${currentQuery} ничего не найдено!`)
-          );
-        })
+      this.setState({ status: 'pending',error:null });
+    pixabayApi.fetchImages(currentQuery,page)
         .then(images => this.setState({ images, status: 'resolved' }))
         .catch(error => this.setState({ error, status: 'rejected' }));
     }

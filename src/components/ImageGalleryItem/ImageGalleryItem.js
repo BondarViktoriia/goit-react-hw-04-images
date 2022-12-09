@@ -14,7 +14,7 @@ export class ImageGalleryItem extends Component {
   };
 
   render() {
-    const {images: { hits }} = this.props;
+    const {images: {hits}} = this.props;
 
     return (
       <>
