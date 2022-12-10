@@ -4,7 +4,7 @@ import Loader from 'components/Loader';
 import Button from 'components/Button';
 import { GalleryContainer, Request, ErrorMessage } from './ImageGallery.styled';
 import PropTypes from 'prop-types';
-import pixabayApi from '../services/pixabay-api'
+import pixabayApi from '../services/pixabay-api';
 
 export default class ImageGallery extends Component {
   state = {
@@ -25,9 +25,15 @@ export default class ImageGallery extends Component {
 
     if (prevQuery !== currentQuery || prevState.page !== this.state.page) {
       console.log('Изменился query');
-      this.setState({ status: 'pending',error:null });
-    pixabayApi.fetchImages(currentQuery,page)
-        .then(images => this.setState({ images, status: 'resolved' }))
+      this.setState({ status: 'pending', error: null });
+      pixabayApi
+        .fetchImages(currentQuery, page)
+        .then(data => {
+          this.setState({
+            images: [...prevState.images, ...data.hits],
+            status: 'resolved',
+          });
+        })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
@@ -55,7 +61,7 @@ export default class ImageGallery extends Component {
       return (
         <GalleryContainer>
           <ImageGalleryItem images={images} />
-          {images.total > 0 ? (
+          {images.length >= 12 ? (
             <Button onClick={this.loadMore} />
           ) : (
             <ErrorMessage>По Вашему запросу ничего не найдено</ErrorMessage>

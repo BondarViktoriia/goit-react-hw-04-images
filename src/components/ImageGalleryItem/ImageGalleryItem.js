@@ -14,17 +14,17 @@ export class ImageGalleryItem extends Component {
   };
 
   render() {
-    const {images: {hits}} = this.props;
+    const {images} = this.props;
 
     return (
       <>
         <GalleryContainer>
-          {hits.map(entry => (
+          {images.map(entry => (
             <ImageCard
               entry={entry}
               toggleModal={this.toggleModal}
               isModalOpen={this.state.isModalOpen}
-              key={entry.id}
+             key={entry.id}
             />
           ))}
         </GalleryContainer>

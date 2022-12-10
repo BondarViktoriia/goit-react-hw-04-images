@@ -25,18 +25,22 @@ export class ImageCard extends Component {
 
   render() {
     return (
-      <li>
+      <li  key={this.props.id} >
         <Picture
+          
           src={this.props.entry.webformatURL}
           alt={this.props.entry.tags}
           width="300"
           onClick={this.toggleModal}
+         
         />
         {this.state.isModalOpen && (
           <Modal
+           
             largeImageURL={this.props.entry.largeImageURL}
             tags={this.props.entry.tags}
             onClose={this.toggleModal}
+             
           />
         )}
       </li>

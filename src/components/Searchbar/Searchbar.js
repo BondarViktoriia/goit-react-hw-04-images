@@ -10,13 +10,15 @@ import {
 export class SearchBar extends Component {
   state = {
     query: '',
-  
+    page: 1,
+   images:[]
     
   };
 
   handleQueryChange = e => {
     this.setState({
       query: e.currentTarget.value.toLowerCase(),
+
       
     });
   
@@ -28,7 +30,7 @@ export class SearchBar extends Component {
       return;
     }
     this.props.onSubmit(this.state.query);
-    this.setState({ query: '',});
+    this.setState({ query: '', page: 1 , images:[]});
   
 
     
