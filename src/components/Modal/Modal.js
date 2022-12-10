@@ -1,45 +1,38 @@
-import { createPortal } from 'react-dom';
-import { Component } from 'react';
-import { ModalBackdrop, ModalContent } from './Modal.styled';
-import PropTypes from 'prop-types';
+import { Component } from "react";
+import {ModalContent,ModalBackdrop} from './Modal.styled'
+import { createPortal } from "react-dom";
 
-const addModal = document.querySelector('#modal-root');
-export default class Modal extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
-  };
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown );
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown );
-  }
-
-  handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      this.props.onClose();
+  const addModal = document.querySelector("#modal-root");
+export default class Modal extends Component{
+    componentDidMount() {
+        console.log(" Modal componentDidMount");
+        window.addEventListener('keydown',this.handleKeyDown)
     }
-  };
-  handleBackdropClick = e => {
-    console.log('Кликнули в бекдроп');
-    if (e.currentTarget === e.target) {
-      this.props.onClose();
+    componentWillUnmount() {
+        console.log('Modal componentWillUnmount');
+        window.removeEventListener('keydown',this.handleKeyDown)
     }
-    if (e.code === 'Escape') {
-      console.log('Click esc need close modal', e.code);
-      this.props.onClose();
-    }
-  };
 
-  render() {
-    const { largeImageURL, tags } = this.props;
-    return createPortal(
-      <ModalBackdrop onClick={this.handleBackdropClick}>
-        <ModalContent src={largeImageURL} alt={tags} width="600" />
-      </ModalBackdrop>,
-      addModal
-    );
-  }
+   handleKeyDown =  e => {
+            if (e.code === "Escape") {
+      
+                console.log('Click esc need close modal');
+                this.props.onClose();
+            }
+        }
+    handleBackdropClick = e => {
+        console.log('Кликнули в бекдроп')
+        if (e.currentTarget === e.target) {
+            this.props.onClose();
+        }
+   }
+    
+    
+    render() {
+        return createPortal( <ModalBackdrop onClick={this.handleBackdropClick}>
+            <ModalContent src={this.props.large } alt={this.props.alt} width="600"  /> 
+         </ModalBackdrop>,addModal)
+    }
+
 }

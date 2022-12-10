@@ -10,30 +10,19 @@ import {
 export class SearchBar extends Component {
   state = {
     query: '',
-    page: 1,
-   images:[]
     
   };
-
   handleQueryChange = e => {
-    this.setState({
-      query: e.currentTarget.value.toLowerCase(),
-
-      
-    });
-  
+    this.setState({ query: e.currentTarget.value.toLowerCase() });
   };
   handleSubmit = e => {
-    e.preventDefault();
-    if (this.state.query.trim() === '') {
-      alert('Введите запрос');
-      return;
-    }
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '', page: 1 , images:[]});
-  
-
-    
+      e.preventDefault();
+      if (this.state.query.trim() === '') {
+          alert('Please enter a request')
+      }
+        this.props.onSubmit(this.state.query)
+    this.setState({ query: '' });
+   
   };
 
   render() {
