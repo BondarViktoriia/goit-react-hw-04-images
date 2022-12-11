@@ -6,23 +6,26 @@ import {
   SearchButton,
   SearchInput,
 } from './Searchbar.styled';
+import PropTypes from 'prop-types';
 
 export class SearchBar extends Component {
   state = {
     query: '',
-    
   };
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   handleQueryChange = e => {
     this.setState({ query: e.currentTarget.value.toLowerCase() });
   };
   handleSubmit = e => {
-      e.preventDefault();
-      if (this.state.query.trim() === '') {
-          alert('Please enter a request')
-      }
-        this.props.onSubmit(this.state.query)
+    e.preventDefault();
+    if (this.state.query.trim() === '') {
+      alert('Please enter a request');
+    }
+    this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
-   
   };
 
   render() {

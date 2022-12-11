@@ -14,7 +14,7 @@ export class App extends Component {
     error: null,
     page: 1,
     total: 0,
-    status:'idle'
+    status: 'idle',
   };
 
   handleFormSubmit = query => {
@@ -27,7 +27,13 @@ export class App extends Component {
       console.log('new request');
       pixabayApi
         .fetchImages(this.state.query, this.state.page)
-        .then(images => this.setState({ images: images.hits ,total:images.total,status:'resolved'}))
+        .then(images =>
+          this.setState({
+            images: images.hits,
+            total: images.total,
+            status: 'resolved',
+          })
+        )
         .catch(error => this.setState({ error }))
         .finally(() => this.setState({ isLoading: false }));
     }
@@ -50,17 +56,16 @@ export class App extends Component {
   };
 
   render() {
-    const { isLoading, query, images, error,total,status} = this.state;
+    const { isLoading, query, images, error, status, total } = this.state;
     return (
       <>
         <SearchBar onSubmit={this.handleFormSubmit} />
         {isLoading && <Loader />}
         {!query && <Request>Enter a request</Request>}
         {error && <ErrorMessage> {error.message}</ErrorMessage>}
-        {status === 'resolved' & total >1 ? (
-          <ImageGallery images={images} />
-        ) : (
-          <ErrorMessage> Nothing found</ErrorMessage>
+        {status === 'resolved' && <ImageGallery images={images} />}
+        {status === 'resolved' && total === 0 && (
+          <ErrorMessage>Nothing Found</ErrorMessage>
         )}
         {images.length >= 12 && <Button onClick={this.loadMore} />}
       </>
