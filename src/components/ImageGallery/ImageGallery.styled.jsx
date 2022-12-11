@@ -17,7 +17,7 @@ export const Request = styled.div`
   color: green;
 `;
 
-export const ErrorMessage = styled.h1`
+export const ErrorMessage = styled.div`
   font-size: 50px;
   font-weight: bold;
   margin: auto;
